@@ -1,0 +1,30 @@
+.ModalheadCount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(-135deg,  #2f40a0fb, #0b12df);
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    color: white;
+    font-family: monospace;
+    height: 50px;
+}
+
+.ModalBox {
+    border-radius: 20px;
+    background-image: linear-gradient(-135deg,  #dbdce3, #5e5f82);
+    font-size: 22px;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
