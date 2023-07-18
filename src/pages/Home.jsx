@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "../styles/Home.css";
 import Loading from "../components/Loading";
 import { LoginFetch } from "../services/BDRequests";
-import Analytics from "../components/Analytics";
+import Analytics from "../components/AnalyticsPeople/Analytics";
 
 
 
@@ -41,7 +41,7 @@ function Home() {
 
     return (
         <div className="App">
-            {loading ? <Loading /> :
+            {loading ? <Loading animate={loading} /> :
                 theRightRender()}
         </div>
     );
