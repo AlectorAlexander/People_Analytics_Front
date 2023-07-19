@@ -110,7 +110,6 @@ FormDate.propTypes = {
     setMonth: PropTypes.func.isRequired,
     setYear: PropTypes.func.isRequired,
     setDay: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
 };
 
 

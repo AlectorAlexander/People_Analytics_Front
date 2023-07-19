@@ -5,10 +5,12 @@ import "../../styles/Modal.css";
 import Button from "react-bootstrap/Button";
 import FormDate from "./FormDate";
 import { HeadcountFetch, headcountForIndirects, turnoverForIndirects, TurnoverFetch } from "../../services/BDRequests.js";
+import { timeFormat } from "d3-time-format";
 import ReactLoading from "react-loading";
 
 
-function ModalRender({ open, handleClose, handleOpen, TypeOfAnalysis }) {
+
+function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis }) {
     const [startYear, setStartYear] = useState(2020);
     const [startMonth, setStartMonth] = useState(1);
     const [startDay, setStartDay] = useState(1);
@@ -17,6 +19,9 @@ function ModalRender({ open, handleClose, handleOpen, TypeOfAnalysis }) {
     const [endDay, setEndDay] = useState(1);
     const [selectValue, setSelectValue] = useState("a");
     const [loading, setLoading] = useState(false);
+
+
+    const formatDate = timeFormat("%d/%m/%y");
 
     const handleHeadcount = () => {
         const leaderEmail = JSON.parse(localStorage.getItem("userEmail"));
@@ -33,7 +38,25 @@ function ModalRender({ open, handleClose, handleOpen, TypeOfAnalysis }) {
                     if (activeEmployees.length === 0) {
                         alert("Não foram encontrados dados com esses parâmetros de pesquisa");
                     } else {
-                        console.log(activeEmployees);
+                        let cumulativeCount = 0;
+                        const dataMap = new Map();
+
+                        activeEmployees.sort((a, b) => new Date(a.hireDate) - new Date(b.hireDate))
+                            .forEach((employee) => {
+                                const { hireDate } = employee;
+                                cumulativeCount++;
+                                dataMap.set(hireDate, cumulativeCount);
+                            });
+
+                        const data = [
+                            {
+                                id: "Headcount",
+                                color: "hsl(205, 70%, 50%)",
+                                data: Array.from(dataMap, ([x, y]) => ({ x: formatDate(new Date(x)), y })),
+                            },
+                        ];
+                        console.log(data);
+                        setData(data);
                     }
                 } else {
                     alert("Não foi possível realizar essa pesquisa");
@@ -63,7 +86,25 @@ function ModalRender({ open, handleClose, handleOpen, TypeOfAnalysis }) {
                     if (employeesFired.length === 0) {
                         alert("Não foram encontrados dados com esses parâmetros de pesquisa");
                     } else {
-                        console.log(employeesFired);
+                        let cumulativeCount = 0;
+                        const dataMap = new Map();
+
+                        employeesFired.sort((a, b) => new Date(a.terminationDate) - new Date(b.terminationDate))
+                            .forEach((employee) => {
+                                const { terminationDate } = employee;
+                                cumulativeCount++;
+                                dataMap.set(terminationDate, cumulativeCount);
+                            });
+
+                        const data = [
+                            {
+                                id: "Turnover",
+                                color: "hsl(205, 70%, 50%)",
+                                data: Array.from(dataMap, ([x, y]) => ({ x: formatDate(new Date(x)), y })),
+                            },
+                        ];
+                        console.log(data);
+                        setData(data);
                     }
                 }
             })
@@ -74,6 +115,7 @@ function ModalRender({ open, handleClose, handleOpen, TypeOfAnalysis }) {
                 setLoading(false);
             });
     };
+
 
     const callTheRightFunction = () => {
         if (TypeOfAnalysis === "Headcount") {
@@ -190,6 +232,7 @@ function ModalRender({ open, handleClose, handleOpen, TypeOfAnalysis }) {
 ModalRender.propTypes = {
     open: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
+    setData: PropTypes.func.isRequired,
     handleOpen: PropTypes.func.isRequired,
     TypeOfAnalysis: PropTypes.string.isRequired,
 };
