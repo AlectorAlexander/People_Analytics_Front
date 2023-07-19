@@ -17,7 +17,7 @@ function Home() {
         LoginFetch(email)
             .then((res) => {
                 if (res.status === 200) {
-                    localStorage.setItem("userEmail", email);
+                    localStorage.setItem("userEmail", JSON.stringify(email));
                     setDuzentão(true);
                     setLoading(false);
                 } else {
