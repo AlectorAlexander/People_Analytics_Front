@@ -34,7 +34,7 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
         fetchData(startDate, endDate, leaderEmail)
             .then((response) => {
                 if (response.status === 200) {
-                    const { activeEmployees } = response.data;
+                    const { activeEmployees, headcount } = response.data;
                     if (activeEmployees.length === 0) {
                         alert("Não foram encontrados dados com esses parâmetros de pesquisa");
                     } else {
@@ -50,12 +50,12 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
 
                         const data = [
                             {
+                                headcount,
                                 id: "Headcount",
                                 color: "hsl(205, 70%, 50%)",
                                 data: Array.from(dataMap, ([x, y]) => ({ x: formatDate(new Date(x)), y })),
                             },
                         ];
-                        console.log(data);
                         setData(data);
                     }
                 } else {
@@ -82,7 +82,7 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
         fetchData(startDate, endDate, leaderEmail)
             .then((response) => {
                 if (response.status === 200) {
-                    const { employeesFired } = response.data;
+                    const { employeesFired, turnover } = response.data;
                     if (employeesFired.length === 0) {
                         alert("Não foram encontrados dados com esses parâmetros de pesquisa");
                     } else {
@@ -98,6 +98,7 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
 
                         const data = [
                             {
+                                turnover,
                                 id: "Turnover",
                                 color: "hsl(205, 70%, 50%)",
                                 data: Array.from(dataMap, ([x, y]) => ({ x: formatDate(new Date(x)), y })),
