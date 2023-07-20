@@ -1,3 +1,48 @@
+.button-Analysis {
+    height: 55px;
+    box-shadow: 12px 12px 12px black;
+  background-image: linear-gradient(-135deg,  #17412eba, #18563a92, #141247d9, #0d354374, #082b2372);
+  border-radius: 20px 
+  !important;
+}
+
+.button-Analysis:hover {
+    height: 55px;
+    box-shadow: 17px 17px 17px black
+    !important;
+}
+
+
+
+.button-Analysis span {
+    font-size: 25px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.887);
+    font-weight: bolder;
+    color: rgba(255, 255, 255, 0.844)
+}
+
+.button-Analysis span:hover {
+    font-size: 25px;
+    text-shadow: 5px 5px 5px black
+}
+
+.button-search {
+    height: 40px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.67);
+}
+
+.button-search span {
+    font-size: 20px;
+    font-family:monospace;
+    text-shadow: 2px 2px 2px black
+}
+
+.button-search span:hover {
+    text-shadow: 5px 5px 5px black
+}
+
+
+
 .ModalheadCount {
     display: flex;
     justify-content: center;
@@ -8,18 +53,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(-135deg,  #2f40a0fb, #0b12df);
+    background-image: linear-gradient(-135deg,  #2fa03afb, #04400a);
     width: 100%;
     border-radius: 20px 20px 0 0;
     color: white;
-    font-family: monospace;
+    text-shadow: 2px 2px 2px black;
     height: 50px;
 }
 
 .ModalBox {
     border-radius: 20px;
     background-image: linear-gradient(-135deg,  #dbdce3, #5e5f82);
-    font-size: 22px;
+    font-size: 16px;
     text-align: center;
 }
 

@@ -23,7 +23,7 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
 
     const formatDate = timeFormat("%d/%m/%y");
 
-    const handleHeadcount = () => {
+    const handleHeadcountAndTurnover = () => {
         const leaderEmail = JSON.parse(localStorage.getItem("userEmail"));
         const startDate = `${startYear}-${startMonth}-${startDay}`;
         const endDate = `${endYear}-${endMonth}-${endDay}`;
@@ -120,7 +120,7 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
 
     const callTheRightFunction = () => {
         if (TypeOfAnalysis === "Headcount") {
-            handleHeadcount();
+            handleHeadcountAndTurnover();
         } else {
             handleTurnover();
         }
@@ -137,28 +137,19 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
         pt: 0,
         px: 0,
         pb: 0,
-        maxHeight: "100vh", // Defina a altura máxima desejada aqui
-        overflowY: "auto", // Habilita a barra de rolagem quando o conteúdo excede a altura máxima
+        maxHeight: "100vh",
+        overflowY: "auto", 
     };
 
     return (
-        <div className="d-flex justify-content-center mt-3">
+        <div className="Modal d-flex justify-content-center mt-3">
             <Button
                 type="button"
                 variant="success"
-                className="button-login"
+                className="button-Analysis my-3"
                 onClick={handleOpen}
-                sx={{
-                    input: {
-                        color: "white",
-                        fontFamily: "nunito",
-                        fontSize: "2.2rem",
-                        fontWeight: "bold",
-                    },
-                    fieldset: { borderColor: "green" },
-                }}
             >
-                {`Ver ${TypeOfAnalysis}`}
+                <span>{`Ver ${TypeOfAnalysis}`}</span>
             </Button>
             <Modal
                 open={open}
@@ -168,12 +159,12 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
                 aria-describedby="parent-modal-description"
             >
                 <Box className="ModalBox d-flex justify-content-center flex-column" sx={{ ...style, width: 400 }}>
-                    <div className="header mt-2">
+                    <div className="header">
                         <h2 className="mt-3" id="parent-modal-title">{`${TypeOfAnalysis}`}</h2>
                     </div>
-                    <h3 className="" id="parent-modal-description">
+                    <p className="p-2" id="parent-modal-description">
             Defina o período desejado para realizar a análise.
-                    </h3>
+                    </p>
 
                     <div className="form d-flex justify-content-center flex-column">
                         <p className="mt-1">Pesquisar da data:</p>
@@ -216,11 +207,11 @@ function ModalRender({ setData, open, handleClose, handleOpen, TypeOfAnalysis })
                         ) : (
                             <Button
                                 type="button"
-                                variant="primary"
-                                className="search-button w-25 mb-3"
+                                variant="success"
+                                className="button-search mb-1"
                                 onClick={callTheRightFunction}
                             >
-                Pesquisar
+                                <span>Pesquisar</span>
                             </Button>
                         )}
                     </div>

@@ -2,6 +2,11 @@
     background-color: rgba(19, 11, 39, 0.63);
 }
 
+.form-login {
+    width: 300px;
+    
+}
+
 .button-login {
     box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.328);
     font-size: 30px;
